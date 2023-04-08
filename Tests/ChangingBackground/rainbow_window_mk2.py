@@ -20,7 +20,7 @@ pygame.display.set_caption("Rainbow Window")
 
 #Set a waiting time between screen updates so that the user can understand what is happening on the screen
 #Waiting time in milliseconds
-cooldown_time = 100
+cooldown_time = 250
 
 #Set the checking time so that the computer knows what the comparison is going to be with
 last_update_time = pygame.time.get_ticks()

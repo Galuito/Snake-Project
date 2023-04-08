@@ -15,9 +15,9 @@ cols = width // cell_size
 
 #Set a waiting time between screen updates so that the user can understand what is happening on the screen
 #Waiting time in milliseconds
-cooldown_time = 50
 
 #Set the checking time so that the computer knows what the comparison is going to be with
+cooldown_time = 100
 last_update_time = pygame.time.get_ticks()
 
 #Game Loop

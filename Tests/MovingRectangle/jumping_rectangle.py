@@ -19,30 +19,37 @@ rectangle_speed_y = rectangle_speed_x
 window = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Grid Rectangle")
 
-starting_x = 40
-starting_y = 0
+starting_x = 120
+starting_y = 160
 my_rect = pygame.Rect(starting_x, starting_y, rectangle_side, rectangle_side)
 pygame.draw.rect(window, (255, 255, 255), my_rect, 0)
 pygame.display.update()
 
-pygame.time.delay(50)
+# pygame.time.delay(50)
+
+
+last_checked_time = pygame.time.get_ticks()
+delay_time = 150
 
 while True:
   for event in pygame.event.get():
     if event.type == QUIT: # This QUIT works because I imported pygame.locals
       pygame.quit()
       sys.exit()
-  my_rect.move_ip(rectangle_speed_x, rectangle_speed_y)
-  if my_rect.bottom >= height:
-    rectangle_speed_y *= -1
-  if my_rect.right >=  width:
-    rectangle_speed_x *= -1
-  if my_rect.left <= 0:
-    rectangle_speed_x *= -1
-  if my_rect.top <= 0:
-    rectangle_speed_y *= -1
-  window.fill((0, 0, 0))
-  pygame.draw.rect(window, (255, 255, 255), my_rect, 0)
-  pygame.display.update()
-  pygame.time.delay(500)
+  
+  current_time = pygame.time.get_ticks()
+  if current_time - last_checked_time > delay_time:
+    last_checked_time = current_time
+    my_rect.move_ip(rectangle_speed_x, rectangle_speed_y)
+    if my_rect.bottom >= height:
+      rectangle_speed_y *= -1
+    if my_rect.right >=  width:
+      rectangle_speed_x *= -1
+    if my_rect.left <= 0:
+      rectangle_speed_x *= -1
+    if my_rect.top <= 0:
+      rectangle_speed_y *= -1
+    window.fill((0, 0, 0))
+    pygame.draw.rect(window, (255, 255, 255), my_rect, 0)
+    pygame.display.update()
   

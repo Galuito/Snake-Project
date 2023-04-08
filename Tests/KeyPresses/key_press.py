@@ -18,8 +18,6 @@ while True:
       pygame.quit()
       sys.exit()
   
-  # window.fill((0, 0, 0))
-  pygame.display.update()
 
   # Rather than doing a general cool down for everything I should do a cool down for key presses, so that whenever
   # a key is pressed a cool down starts in which the user will have to wait a certain amount of milliseconds until
@@ -46,6 +44,7 @@ while True:
       print("Left Key Pressed")
       window.fill((0, 255, 0))
       last_checked_time = current_time
+  pygame.display.update()
   
   clock.tick(FPS)
   

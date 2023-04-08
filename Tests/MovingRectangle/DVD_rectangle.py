@@ -34,6 +34,9 @@ xv = round(random.uniform(2.00, 10), 2)
 yv = round(random.uniform(2.00, 10), 2)
 my_rect = pygame.Rect(rect_x, rect_y, rect_width, rect_height)
 
+last_checked_time = pygame.time.get_ticks()
+delay_time = 50
+
 while True:
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -43,25 +46,29 @@ while True:
     # inside of a variable and is not quite as efficient as working with the same rectangle (this case).
     # my_rect.move(dx, dy)
     # The way to use it would be -> new_rect = my_rect.move(dx, dy)
-    my_rect.move_ip(xv, yv)
-    if(my_rect.bottom >= screen_height):
-        yv *= -1
-        next_color()
-    if(my_rect.right >= screen_width):
-        xv *= -1
-        next_color()
-    if(my_rect.left <= 0):
-        xv *= -1
-        next_color()
-    if(my_rect.top <= 0):
-        yv *= -1
-        next_color()
 
-    screen.fill((0, 0, 0))
-    # The problem that I was having previously was that I was not drawing the rectangle again, I was only updating
-    # my rectangle which made a change to the item but not to the item.
-    # draw rectangle on screen with white color using the attributes found inside of my_rect
-    # the 0 is not necessary but if you make it a 1 the rectangle becomes hollow inside.
-    pygame.draw.rect(screen, colors[color_picker], my_rect, 0)
-    pygame.display.update()
-    pygame.time.delay(50)
+    current_time = pygame.time.get_ticks()
+    if current_time - last_checked_time > delay_time:
+      last_checked_time = current_time
+
+      my_rect.move_ip(xv, yv)
+      if(my_rect.bottom >= screen_height):
+          yv *= -1
+          next_color()
+      if(my_rect.right >= screen_width):
+          xv *= -1
+          next_color()
+      if(my_rect.left <= 0):
+          xv *= -1
+          next_color()
+      if(my_rect.top <= 0):
+          yv *= -1
+          next_color()
+
+      screen.fill((0, 0, 0))
+      # The problem that I was having previously was that I was not drawing the rectangle again, I was only updating
+      # my rectangle which made a change to the item but not to the item.
+      # draw rectangle on screen with white color using the attributes found inside of my_rect
+      # the 0 is not necessary but if you make it a 1 the rectangle becomes hollow inside.
+      pygame.draw.rect(screen, colors[color_picker], my_rect, 0)
+      pygame.display.update()
